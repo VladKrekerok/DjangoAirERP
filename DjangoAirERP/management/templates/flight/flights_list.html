@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Flight List{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/staff/data_list.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container cont-list">
+
+        {% include "flight/flight_filter.html" %}
+
+        {% for flight in object_list %}
+            <div class="card">
+                <div class="describe">
+                    <p>Airplane: <span class="air-view">{{ flight.airplane.name }} {{ flight.airplane.model }}</span>
+                    </p>
+                    <p>
+                        From: <span
+                            class="data-view">{{ flight.from_city.country }} {{ flight.from_city.name }} {{ flight.from_airport }}</span>
+                        <i class="bi bi-arrow-right"></i>
+                        To: <span
+                            class="data-view">{{ flight.to_city.country }} {{ flight.to_city.name }} {{ flight.to_airport }}</span>
+
+                    </p>
+                    <p><b>{{ flight.flight_time }}</b></p>
+                    <p>
+                        <span class="data-view">{{ flight.departure_date }}</span>
+                        <i class="bi bi-arrow-right"></i>
+                        <span class="data-view">{{ flight.date_arrival }}</span>
+                    </p>
+                </div>
+                <small>Registration time: {{ flight.date_registration }} </small>
+
+                <p align="center">
+                    <a class="btn form-btn btn-warning" href="{% url 'flight_detail' flight.pk %}">
+                        Flight information
+                    </a>
+                </p>
+            </div>
+            <br>
+        {% endfor %}
+
+        {% if page_obj.has_other_pages %}
+            {% include "pagination.html" %}
+        {% endif %}
+    </div>
+{% endblock %}

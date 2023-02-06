@@ -1,0 +1,13 @@
+tr, th, td {
+    border-width: 2px;
+}
+
+.ticket-tabl {
+    border-color: #969595;
+    text-align: center;
+    border-width: 1px;
+}
+
+.name-field {
+    color: #d70d25;
+}

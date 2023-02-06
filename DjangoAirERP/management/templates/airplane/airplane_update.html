@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Editing Airplane{% endblock %}
+{% block head %}
+    <link href="{% static "css/staff/form.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container my-card">
+        <h2>Editing airplane data</h2>
+        <form action="{% url 'airplane_update' object.id %}" method="post">
+            {% csrf_token %}
+            <b>{{ form|crispy }}</b>
+            <input class="btn btn-warning form-btn" type="submit" value="Change"/>
+        </form>
+        {% include "airplane/airplane_delete.html" %}
+    </div>
+{% endblock %}

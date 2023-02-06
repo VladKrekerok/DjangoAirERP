@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Flights{% endblock %}
+{% block head %}
+    <link href="{% static 'css/customer/flights.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    {% include 'flights/form_search.html' %}
+
+    {% if flights %}
+        <div class="main-div">
+            {% for flight, price, places, options in flights %}
+                <form action="{% url 'flights_reservation' flight.id %}" method="get">
+                    <input type="hidden" name="adults" value="{{ initial.adults }}">
+                    <input type="hidden" name="children" value="{{ initial.children }}">
+                    <input type="hidden" name="infants" value="{{ initial.infants }}">
+                    <input type="hidden" name="class" value="{{ initial.class }}">
+
+                    <div class="container card ticket-card">
+                        <div class="row">
+                            {% include "flights/card_flight.html" %}
+                            <div id="ticket-button">
+                                <input class="btn btn-warning price-btn" type="submit" value="By for {{ price }}$"/>
+                                <p class="places"><small>Places available:</small> <b>{{ places }}</b></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+                <br>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}

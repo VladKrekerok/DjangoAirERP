@@ -1,0 +1,28 @@
+{% if form_search %}
+
+    <div class="div-descr-card">
+        <h5><b>Enter ticket code</b></h5>
+        {% if error %}
+            <div class="alert alert-danger" id="tickets_alert" style="" role="alert">{{ error }}</div>
+        {% endif %}
+        <form action="{% url "ticket_search" user.id %}" method="get">
+            {% csrf_token %}
+            {{ form_search }}
+            <p><input class="btn btn-warning customer-btn" type="submit" value="Search"/></p>
+        </form>
+    </div>
+
+{% elif ticket_reg %}
+
+    <div class="div-descr-card">
+        <h5><b>Register a ticket</b></h5>
+        <form action="{% url "ticket_reg" user.id ticket_reg.id %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <p><input class="btn btn-warning customer-btn customer-input" type="submit" value="Register"/></p>
+        </form>
+        <p align="left">- The ticket will become registered to you.</p>
+        <p align="left">- Your place will be indicated on the ticket.</p>
+    </div>
+
+{% endif %}

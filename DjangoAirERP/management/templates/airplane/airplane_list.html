@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Cities List{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/staff/data_list.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container tabl-cont" id="tabl-airplane">
+        <h2>Airplanes</h2>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Model</th>
+                <th scope="col">Comfort places</th>
+                <th scope="col">Economy places</th>
+                <th scope="col">Busy date</th>
+                <th scope="col">Location</th>
+                <th scope="col">Date registration</th>
+                <th scope="col">Change</th>
+            </tr>
+            </thead>
+            {% for airplane in object_list %}
+                <tbody>
+                <tr>
+                    <th scope="row">{{ airplane.id }}</th>
+                    <td>{{ airplane.name }}</td>
+                    <td>{{ airplane.model }}</td>
+                    <td>{{ airplane.comfort_places }}</td>
+                    <td>{{ airplane.economy_places }}</td>
+                    <td>{{ airplane.busy_date }}</td>
+                    <td>{{ airplane.location }}</td>
+                    <td>{{ airplane.date_registration }}</td>
+                    <td>
+                        <a class="btn btn-info" href="{% url "airplane_update" airplane.id %}">Update</a>
+                    </td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+
+        {% if page_obj.has_other_pages %}
+            {% include "pagination.html" %}
+        {% endif %}
+    </div>
+{% endblock %}

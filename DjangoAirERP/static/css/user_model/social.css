@@ -1,0 +1,27 @@
+.social-cont {
+    text-align: center;
+    margin-top: 250px;
+}
+
+#continue {
+    font-size: 1.5rem;
+}
+
+span {
+    color: #b40808;
+}
+.form_auth {
+    width: 500px;
+    margin: auto;
+    margin-top: 150px;
+}
+
+#sub-log{
+    margin-top: 7px;
+    width: 250px;
+    height: 50px;
+}
+
+#btn-link{
+    text-decoration: none;
+}

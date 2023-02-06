@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Staff List{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/staff/data_list.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container tabl-cont">
+        <h2>Staff</h2>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Gmail</th>
+                <th scope="col">Position</th>
+                <th scope="col">Date Accession</th>
+                <th scope="col">profiles</th>
+            </tr>
+            </thead>
+            {% for staff in object_list %}
+                <tbody>
+                <tr>
+                    <th scope="row">{{ staff.id }}</th>
+                    <td>{{ staff.account.get_name }}</td>
+                    <td>{{ staff.account.get_surname }}</td>
+                    <td>{{ staff.account.email }}</td>
+                    <td>{{ staff.position }}</td>
+                    <td>{{ staff.date_accession }}</td>
+                    {% if staff.position == 'supervisor' %}
+                        <td><input class="btn btn-info" type="submit" value="Edit" disabled/></td>
+                    {% else %}
+                        <td><a class="btn btn-info" href="{% url 'staff_update' staff.id %}">Edit</a></td>
+                    {% endif %}
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+
+        {% if page_obj.has_other_pages %}
+            {% include "pagination.html" %}
+        {% endif %}
+    </div>
+{% endblock %}

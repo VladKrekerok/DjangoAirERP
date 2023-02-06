@@ -1,0 +1,10 @@
+{% if customer_update %}
+    <div class="div-descr-card">
+        <h5><b>Your account information</b></h5>
+        <form action="{% url "customer_update" user.id %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <p><input class="btn btn-warning customer-btn" type="submit" value="Change"/></p>
+        </form>
+    </div>
+{% endif %}

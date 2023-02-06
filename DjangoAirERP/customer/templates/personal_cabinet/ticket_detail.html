@@ -1,0 +1,25 @@
+{% if ticket %}
+    <div class="div-descr-card">
+        <div class="row"></div>
+        <h5>Ticket <small><b>code: {{ object.id }}</b></small>{% include "personal_cabinet/ticket_info.html" %}</h5>
+        <div class="row">
+            <div>
+                <p>
+                    <b>{{ object.flight.from_city.name }}</b>
+                    <small>{{ object.flight.departure_date }}</small>
+                    <i class="bi bi-arrow-right"></i>
+                    <b>{{ object.flight.to_city.name }}</b>
+                    <small>{{ object.flight.date_arrival }}</small>
+                </p>
+                <p>
+                    Airport: <b>{{ object.flight.from_airport }}</b>
+                    <i class="bi bi-arrow-right"></i>
+                    Airport: <b>{{ object.flight.to_airport }}</b>
+                </p>
+                <p class="date-pub">
+                    <small>Date of reservation: {{ object.date_reservation }}</small>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endif %}

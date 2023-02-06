@@ -1,0 +1,39 @@
+<div class="row" id="ticket-descr">
+    <div id="descr-left">
+        <br>
+        <p>{{ flight.departure_date|time:"H:i" }}</p>
+        <p>{{ flight.departure_date|date:"j.m.Y" }}</p>
+        <p>
+            <b>{{ flight.from_city.name }}</b> Airport: <b>{{ flight.from_airport.name }}</b>
+        </p>
+    </div>
+
+    <div id="descr-mid">
+        <br>
+        <small>{{ flight.flight_time }}</small>
+        <hr class="distance">
+    </div>
+
+    <div id="descr-right">
+        <br>
+        <p>{{ flight.date_arrival|time:"H:i" }}</p>
+        <p>{{ flight.date_arrival|date:"j.m.Y" }}</p>
+        <p>
+            <b>{{ flight.to_city.name }}</b> Airport: <b>{{ flight.to_airport.name }}</b>
+        </p>
+    </div>
+</div>
+
+<div id="ticket-options">
+    {% if 'lunch' in options %}
+        <img class="img-options" src="../../../static/img/customer/ticket/lunch.png">
+    {% else %}
+        <img class="img-options" src="../../../static/img/customer/ticket/without_lunch.png">
+    {% endif %}
+
+    {% if 'luggage' in options %}
+        <img class="img-options" src="../../../static/img/customer/ticket/luggage.png">
+    {% else %}
+        <img class="img-options" src="../../../static/img/customer/ticket/without_luggage.png">
+    {% endif %}
+</div>

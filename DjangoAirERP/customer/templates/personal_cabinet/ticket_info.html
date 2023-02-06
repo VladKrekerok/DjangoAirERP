@@ -1,0 +1,76 @@
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/customer/ticket_info.css' %}">
+{% endblock %}
+
+<button type="button" class="btn form-btn btn-info" data-bs-toggle="modal" data-bs-target="#TicketInfo">
+    Ticket information
+</button>
+
+<div class="modal fade" id="TicketInfo" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-light ticket-tabl">
+                    <thead>
+                        <tr class="name-field">
+                            <th scope="col">Name</th>
+                            <th scope="col">Surname</th>
+                            <th scope="col">Years old</th>
+                            <th scope="col">Birthday</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Document no</th>
+                            <th scope="col">Self check-in</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td scope="row">{{ ticket.first_name }}</td>
+                        <td>{{ ticket.last_name }}</td>
+                        <td>{{ ticket.years_old }}</td>
+                        <td>{{ ticket.date_birthday }}</td>
+                        <td>{{ ticket.gender }}</td>
+                        <td>{{ ticket.document_no }}</td>
+                        <td>{{ ticket.self_check_in }}</td>
+                    </tr>
+                    </tbody>
+                      <thead>
+                        <tr class="name-field">
+                            <th scope="col">Place</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Extra</th>
+                            <th scope="col">Included</th>
+                            <th scope="col">Price ticket</th>
+                            <th scope="col">Discount</th>
+                            <th scope="col">Price to pay</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ ticket.get_place }}</td>
+                        <td>{{ ticket.place_type }}</td>
+                        <td>
+                            {% for option in ticket.extra_options.all %}
+                                {{ option.option }}  {{ option.weight }}kg
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for option in ticket.included_options.all %}
+                                {{ option.option }}
+                            {% endfor %}
+                        </td>
+                        <td>{{ ticket.price }}$</td>
+                        <td>{{ ticket.discount }}</td>
+                        <td>{{ ticket.price_with_options }}$</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

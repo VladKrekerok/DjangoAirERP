@@ -1,0 +1,22 @@
+<div class="modal fade" id="signup_ajax" tabindex="-1" aria-labelledby="ModalSignup" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="ModalSignup">Account sign up</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="alert alert-danger" id="sing_alert" style="display: none;" role="alert"></div>
+            <form action="{% url 'signup' %}" method="POST" id="my_signup">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    {{ signup_form }}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-secondary">Sign up</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

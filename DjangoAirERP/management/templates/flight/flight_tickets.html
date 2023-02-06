@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Ticket search{% endblock %}
+{% block head %}
+    <link href="{% static "css/staff/form.css" %}" rel="stylesheet">
+    <link href="{% static "css/staff/search.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container my-card">
+        {% if error %}
+            <div class="alert alert-danger" id="tickets_alert" style="" role="alert">{{ error }}</div>
+        {% endif %}
+        <h2>Flight search by code</h2>
+        <form action="{% url 'flight_tickets' %}" method="get">
+            {% csrf_token %}
+            <b>{{ form|crispy }}</b>
+            <input class="btn btn-info form-btn" type="submit" value="Search"/>
+        </form>
+    </div>
+
+    {% if flight %}
+        <div class="container table_ticket">
+            <div id="app" class="row mt-5">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <div class="card card-ticket">
+                        <p class="card-header">
+                            Code: {{ flight.id }},
+                            from {{ flight.from_city.name }}
+                            <i class="bi bi-arrow-right"></i>
+                            to {{ flight.to_city.name }}
+                        </p>
+                        <div class="card-body">
+                            <caption><h3 align="center">Tickets</h3></caption>
+                            <table class="table align-middle mb-0 bg-white">
+                                <thead class="bg-light">
+                                <tr>
+                                    <th scope="col">Code</th>
+                                    <th scope="col">Reservation</th>
+                                    <th scope="col">Self check-in</th>
+                                    <th scope="col">Check-in</th>
+                                    <th scope="col">Boarding</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="ticket in tickets">
+                                    <td class="fw-normal mb-1">[[ ticket.id ]]</td>
+                                    <td>
+                    <span class="badge rounded-pill d-inline"
+                          :class="{'bg-success': ticket.reservation !== 'Not registered', 'bg-danger': ticket.reservation === 'Not registered'}">
+                      [[ ticket.reservation ]]
+                    </span>
+                                    </td>
+                                    <td>
+                    <span class="badge rounded-pill d-inline"
+                          :class="{'bg-success': ticket.self_check_in !== 'Not registered', 'bg-danger': ticket.self_check_in === 'Not registered'}">
+                      [[ ticket.self_check_in ]]
+                    </span>
+                                    </td>
+                                    <td>
+                    <span class="badge rounded-pill d-inline"
+                          :class="{'bg-success': ticket.check_in !== 'Not registered', 'bg-danger': ticket.check_in === 'Not registered'}">
+                      [[ ticket.check_in ]]
+                    </span>
+                                    </td>
+
+                                    <td>
+                    <span class="badge rounded-pill d-inline"
+                          :class="{'bg-success': ticket.boarding !== 'Not registered', 'bg-danger': ticket.boarding === 'Not registered'}">
+                      [[ ticket.boarding ]]
+                    </span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+        <script>
+            vueApp = new Vue({
+                el: "#app",
+                delimiters: ["[[", "]]"],
+                data() {
+                    return {
+                        tickets: [],
+                    };
+                },
+            });
+
+            var ws = new WebSocket("ws://{{request.META.HTTP_HOST}}/ws/flights/{{ flight.id }}");
+
+            ws.onopen = function (e) {
+                ws.send(
+                    JSON.stringify({
+                        action: "list",
+                        request_id: new Date().getTime(),
+                    })
+                );
+            };
+
+            ws.onmessage = function (e) {
+                allData = JSON.parse(e.data);
+                if (allData.action === "list") {
+                    vueApp.$data.tickets = allData.data;
+                    vueApp.$forceUpdate();
+                } else if (allData.action === "update") {
+                    vueApp.$data.tickets = allData.data;
+                    vueApp.$forceUpdate();
+                }
+            };
+        </script>
+    {% endif %}
+{% endblock %}

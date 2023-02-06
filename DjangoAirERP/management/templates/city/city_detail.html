@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}City Info{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/staff/data_list.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container cont-list" align="center">
+        <h3> City: <span
+                class="data-view">{{ object.name }} {{ object.country }}</span></h3>
+        <h4>Airports: <a class="btn btn-secondary" href="{% url 'airport_add' object.id %}">Add Airport</a></h4>
+
+        <table class="table table-bordered" id="airports-tabl">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+            </tr>
+            </thead>
+            {% for airport in airports %}
+                <tbody>
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ airport.name }}</td>
+                    <td>{{ airport.address }}</td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+        {% include "city/city_delete.html" %}
+    </div>
+{% endblock %}

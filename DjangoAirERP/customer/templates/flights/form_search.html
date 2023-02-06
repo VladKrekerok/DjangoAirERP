@@ -1,0 +1,91 @@
+{% load static %}
+{% block head %}
+    <link href="{% static 'css/customer/form_search.css' %}" rel="stylesheet">
+{% endblock %}
+
+<div class="search container">
+    <div class="container alert-form">
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="back-fon">
+        <img class="back-img" src="../../../static/img/customer/back-img.png">
+    </div>
+
+    <form action="{% url 'flights_search' %}" method="get">
+        <div class="form-contain">
+            <input class="search-input" type="text" placeholder="Where from"
+                   value="{{ initial.from_city }}" name="from_city" required/>
+            <input class="search-input" type="text" placeholder="Where to"
+                   value="{{ initial.to_city }}" name="to_city" required/>
+            <input class="search-input" type="date"
+                   value="{{ initial.date }}" min="{{ min_date }}" name="date" required/>
+            <a class="btn btn-light search-input dropdown-toggle" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false" data-bs-auto-close="outside">Passengers</a>
+            <ul class="dropdown-menu">
+
+                <div class="counter">
+                    <span id="drop-text">Adults</span>
+                    <span class="tooltip tooltip_top">
+                    <span class="tooltip__element"><i class="bi bi-patch-question-fill"></i></span>
+                    <span class="tooltip__info">12+ years</span>
+                </span>
+                    <button class="counter__btn" type="button" data-direction="minus-adults">
+                        <i class="bi bi-dash-circle"></i>
+                    </button>
+                    <input class="counter__value count" type="number" name="adults"
+                           value="{% if initial.adults %}{{ initial.adults }}{% else %}1{% endif %}" readonly>
+                    <button class="counter__btn" type="button" data-direction="plus">
+                        <i class="bi bi-plus-circle"></i>
+                    </button>
+                </div>
+
+                <div class="counter">
+                    <span id="drop-text">Children</span>
+                    <span class="tooltip tooltip_top">
+                    <span class="tooltip__element"><i class="bi bi-patch-question-fill"></i></span>
+                    <span class="tooltip__info">2–12 years</span>
+                </span>
+                    <button class="counter__btn" type="button" data-direction="minus">
+                        <i class="bi bi-dash-circle"></i>
+                    </button>
+                    <input class="counter__value count" type="number" name="children"
+                           value="{% if initial.children %}{{ initial.children }}{% else %}0{% endif %}" readonly>
+                    <button class="counter__btn" type="button" data-direction="plus">
+                        <i class="bi bi-plus-circle"></i>
+                    </button>
+                </div>
+
+                <div class="counter">
+                    <span id="drop-text">Infants</span>
+                    <span class="tooltip tooltip_top">
+                    <span class="tooltip__element"><i class="bi bi-patch-question-fill"></i></span>
+                    <span class="tooltip__info">Up to 2 years</span>
+                </span>
+                    <button class="counter__btn" type="button" data-direction="minus">
+                        <i class="bi bi-dash-circle"></i>
+                    </button>
+                    <input class="counter__value count" type="number" name="infants"
+                           value="{% if initial.infants %}{{ initial.infants }}{% else %}0{% endif %}" readonly>
+                    <button class="counter__btn" type="button" data-direction="plus">
+                        <i class="bi bi-plus-circle"></i>
+                    </button>
+                </div>
+            </ul>
+
+            <select class="form-select search-class" name="class">
+                <option value="economy" {% if initial.class == 'economy' %}selected{% endif %}>Economy</option>
+                <option value="comfort" {% if initial.class == 'comfort' %}selected{% endif %}>Comfort</option>
+            </select>
+
+            <input class="btn btn-info search-input" type="submit" value="Search"/>
+
+        </div>
+    </form>
+</div>
+
+<script src="{% static "js/customer/form_search.js" %}"></script>

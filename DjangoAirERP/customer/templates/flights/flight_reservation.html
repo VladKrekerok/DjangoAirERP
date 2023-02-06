@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Reservation{% endblock %}
+{% block head %}
+    <link href="{% static 'css/customer/flights.css' %}" rel="stylesheet">
+    <link href="{% static 'css/customer/flight_reservation.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container card ticket-card">
+        <div class="row">
+            {% include "flights/card_flight.html" %}
+        </div>
+    </div>
+
+    <div class="container card ticket-form">
+        <h3>Ticket Reservations</h3>
+
+        <form action="{% url 'flights_reservation' request.resolver_match.kwargs.pk %}" id="tickets_reg" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="class" value="{{ class }}">
+            {{ adults.management_form }}
+            {{ children.management_form }}
+            {{ infants.management_form }}
+            <pre><div class="alert alert-danger" id="tickets_alert" style="display: none;" role="alert"></div></pre>
+            <div align="center">
+                {% for form in adults %}
+                    <h4 class="ticket-title">Adult {{ forloop.counter }}</h4>
+                    {{ form }}
+                    {% include "flights/extra_options.html" %}
+                {% endfor %}
+
+                {% for form in children %}
+                    <h4 class="ticket-title">Children {{ forloop.counter }}</h4>
+                    {{ form }}
+                    {% include "flights/extra_options.html" %}
+                {% endfor %}
+
+                {% for form in infants %}
+                    <h4 class="ticket-title">Infants {{ forloop.counter }}</h4>
+                    {{ form }}
+                {% endfor %}
+            </div>
+
+            {% if user.is_authenticated %}
+                <input class="btn btn-warning reservation-btn" type="submit"
+                       value="Price without options {{ price }}$"/>
+            {% else %}
+                <div class="row">
+                    <div class="block-sign-btn">
+                        <button type="button" class="btn btn-warning sign-bnt" data-bs-toggle="modal"
+                                data-bs-target="#signup_ajax">
+                            Sign up for an account
+                        </button>
+                    </div>
+
+                    <div class="block-sign-btn">
+                        <button type="button" class="btn btn-warning sign-bnt" data-bs-toggle="modal"
+                                data-bs-target="#login_ajax">
+                            Login in account
+                        </button>
+                    </div>
+                </div>
+            {% endif %}
+        </form>
+        <br>
+    </div>
+{% endblock %}

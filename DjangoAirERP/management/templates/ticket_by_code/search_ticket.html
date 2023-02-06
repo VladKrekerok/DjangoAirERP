@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Ticket search{% endblock %}
+{% block head %}
+    <link href="{% static "css/staff/form.css" %}" rel="stylesheet">
+    <link href="{% static "css/staff/search.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container my-card">
+        {% if error %}
+            <div class="alert alert-danger" id="tickets_alert" style="" role="alert">{{ error }}</div>
+        {% endif %}
+
+        <h2>Search for a ticket by code</h2>
+        <form action="{% url 'search_ticket' %}" method="get">
+            {% csrf_token %}
+            <b>{{ form|crispy }}</b>
+            <input class="btn btn-info form-btn" type="submit" value="Search"/>
+        </form>
+
+        {% if ticket %}
+            <br>
+            {% include "ticket_by_code/table_ticket.html" %}
+
+            {% if user.staff.position == 'supervisor' or user.staff.position == 'gate' %}
+                {% if ticket.boarding_time %}
+                    <input class="btn btn-warning form-btn" type="text" placeholder="Landing is registered." disabled>
+                {% else %}
+                    {% include "gate_manager/tickets_landing.html" %}
+                {% endif %}
+            {% endif %}
+
+            {% if user.staff.position == 'supervisor' or user.staff.position == 'check-in' %}
+                {% if ticket.check_in %}
+                    <input class="btn btn-warning form-btn" type="text" placeholder="Ticket checked out." disabled>
+                {% else %}
+                    <a class="btn btn-warning form-btn" href="{% url 'check_in' ticket.id %}">Check-in</a>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

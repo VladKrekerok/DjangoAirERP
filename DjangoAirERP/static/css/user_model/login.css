@@ -1,0 +1,43 @@
+.log-btn {
+    border-radius: 10px;
+    width: 95%;
+    text-decoration: none;
+    font-weight: 900;
+    height: 50px;
+    background-color: #3185b9;
+    color: #fff;
+    margin: auto;
+}
+
+.bi-facebook{
+    color: #1b638d;
+}
+
+.log-site {
+    background-color: #efeeee;
+    margin-bottom: 20px;
+}
+
+.box {
+    text-align: center;
+    position: relative;
+}
+
+.box:after {
+    content: "";
+    display: block;
+    height: 1px;
+    background-color: #a4a0a0;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+}
+
+#or {
+    background-color: #fff;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    padding: 0 10px;
+}

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Flight Registry{% endblock %}
+{% block head %}
+    <link href="{% static "css/staff/form.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'flight_add' %}" id="form_flight" method="post">
+        {% csrf_token %}
+        <div class="container my-card">
+            <h2>Registration data</h2>
+            <b>From city:</b>
+            <input class="form-control print-flight" type="text" value="{{ from_city }}" name="from_city" readonly/>
+            <b>To city:</b>
+            <input class="form-control print-flight" type="text" value="{{ to_city }}" name="to_city" readonly/>
+            <b>Departure date:</b>
+            <input class="form-control print-flight" type="text" value="{{ initial.departure_date }}"
+                   name="departure_date" readonly/>
+            <b>Date arrival:</b>
+            <input class="form-control print-flight" type="text" value="{{ initial.date_arrival }}" name="date_arrival"
+                   readonly/>
+        </div>
+
+        <div class="container my-card">
+            <h2>log a flight</h2>
+            <div class="alert alert-danger" id="flight_alert" style="display: none;" role="alert"></div>
+            <b>Airplane*</b>
+            <select class="form-select" name="airplane_id">
+                {% for airplane in airplanes %}
+                    <option value="{{ airplane.id }}">{{ airplane.name }}.
+                        Comfort: {{ airplane.comfort_places }}
+                        Economy: {{ airplane.economy_places }}</option>
+                {% endfor %}
+            </select>
+
+            <b>From airport*</b>
+            <select class="form-select" name="from_airport_id">
+                {% for airport in from_airport %}
+                    <option value="{{ airport.id }}">{{ airport.name }}</option>
+                {% endfor %}
+            </select>
+            <b>To airport*</b>
+            <select class="form-select" name="to_airport_id">
+                {% for airport in to_airport %}
+                    <option value="{{ airport.id }}">{{ airport.name }}</option>
+                {% endfor %}
+            </select>
+
+            <p><b>Options*</b></p>
+            <div class="options-form">
+                {{ form|crispy }}
+            </div>
+
+            <a class="btn btn-secondary form-btn btn-back" href="{% url 'flight_add' %}">Back</a>
+            {% if airplanes %}
+                <input class="btn btn-warning form-btn btn-back" type="submit" value="Registration"/>
+            {% else %}
+                <br>
+                <input class="btn btn-warning " type="submit"
+                       value="There are no planes available in the city of departure." disabled/>
+            {% endif %}
+
+        </div>
+    </form>
+{% endblock %}

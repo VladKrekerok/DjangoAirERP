@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Flight Info{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/staff/data_list.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container cont-list">
+        <div class="card">
+            <br>
+            <div class="describe">
+                <p>Airplane: <span class="air-view">{{ object.airplane.name }} {{ object.airplane.model }}</span></p>
+                <p>Comfort places: {{ flight.airplane.comfort_places }}</p>
+                <p>Economy places: {{ flight.airplane.economy_places }}</p>
+                <p>Flight time: {{ flight.flight_time }}</p>
+                <p>
+                    From: <span class="data-view">
+                    {{ flight.from_city.country }} {{ flight.from_city.name }} {{ flight.from_airport }}</span>
+                    <i class="bi bi-arrow-right"></i>
+                    To: <span class="data-view">
+                    {{ flight.to_city.country }} {{ flight.to_city.name }} {{ flight.to_airport }}</span>
+                </p>
+                <p>Departure time: <span class="data-view">{{ object.departure_date }}</span>
+                    <i class="bi bi-arrow-right"></i>
+                    Arrival time: <span class="data-view">{{ object.date_arrival }}</span>
+                </p>
+            </div>
+            <small>Registration time: {{ flight.date_registration }} </small>
+
+            <p align="center">
+                {% include "flight/flight_delete.html" %}
+            </p>
+        </div>
+    </div>
+{% endblock %}

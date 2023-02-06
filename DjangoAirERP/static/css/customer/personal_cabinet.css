@@ -1,0 +1,128 @@
+.customer-input {
+    width: 30%;
+    padding: 6px;
+    margin-top: 12px;
+    border-radius: 8px;
+    border-style: none;
+}
+
+.customer-btn {
+    width: 35%;
+    padding: 8px;
+    margin-top: 12px;
+    border-radius: 8px;
+    border-style: none;
+}
+
+.my-contain {
+    margin-top: 120px;
+}
+
+.main-card {
+    width: 70%;
+    background-color: #e8decd;
+}
+
+.customer-buttons {
+    width: 30%;
+    background-color: #a4a3a3;
+    border-radius: 8px;
+}
+
+.div-bi {
+    width: 30%;
+    margin: auto;
+    text-align: right;
+}
+
+
+.bi-person-fill {
+    color: #6e6968;
+    font-size: 1.5rem;
+}
+
+.bi-ticket-detailed {
+    color: #6e6968;
+    font-size: 1.5rem;
+}
+
+
+.bi-earlier {
+    color: #ff2900;
+}
+
+.bi-later {
+    color: #66b75c;
+}
+
+.desc-button {
+    width: 70%;
+    margin-top: 3px;
+    text-align: left;
+    color: black;
+}
+
+.card-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.options {
+    text-decoration: none;
+    color: black;
+    border-style: none;
+}
+
+.div-descr-card {
+    width: 70%;
+}
+
+h5 {
+    margin-top: 15px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.ticket-num {
+    min-width: 64px;
+    width: 10%;
+    margin-top: 8px;
+}
+
+.block-active {
+    min-width: 35px;
+    width: 10%;
+    margin-top: 8px;
+}
+
+.ticket-list-block {
+    width: 80%;
+    text-align: left;
+}
+
+.date-pub {
+    text-align: right;
+    margin-right: 15px;
+}
+
+#ticket-btn {
+    border-width: 0;
+}
+
+.promo-code {
+    width: 50%;
+    padding: 8px;
+    margin-top: 12px;
+    border-radius: 8px;
+    border-style: none;
+    text-align: center;
+}
+
+.errorlist {
+    width: 90%;
+    font-size: 1.1rem;
+    background-color: #f8d7da;
+}

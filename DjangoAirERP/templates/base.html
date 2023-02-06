@@ -1,0 +1,22 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static "base/base.css" %}" rel="stylesheet">
+
+    {% block head %}{% endblock %}
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+{% include "navbar/navbar.html" %}
+
+{% block content %} {% endblock %}
+
+<script src="{% static "base/base.js" %}"></script>
+</body>
+</html>

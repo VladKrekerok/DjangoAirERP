@@ -1,0 +1,50 @@
+version: "3.7"
+
+services:
+  web:
+    build:
+      context: ./
+      dockerfile: Dockerfile.prod
+#    command: python manage.py runserver 0.0.0.0:8000
+#    command: gunicorn DjangoAirERP.wsgi:application --bind 0.0.0.0:8000
+    command: daphne -b 0.0.0.0 -p 8000 DjangoAirERP.asgi:application
+    expose:
+      - 8000
+    volumes:
+      - static_volume:/home/app/web/static
+      - redis_data:/data
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env.prod.db
+
+  redis:
+    image: "redis:alpine"
+    command: redis-server
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data:/data
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 1337:80
+    volumes:
+      - static_volume:/home/app/web/static
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  static_volume:
+  redis_data:

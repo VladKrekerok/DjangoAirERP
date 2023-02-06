@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Error{% endblock %}
+{% block head %}
+    <link href="{% static 'css/user_model/alert.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h4>
+            <i>
+                The link is wrong or outdated, send a second email in your personal cabinet.
+            </i>
+        </h4>
+    </section>
+{% endblock %}

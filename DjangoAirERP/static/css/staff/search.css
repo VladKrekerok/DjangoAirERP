@@ -1,0 +1,17 @@
+tr, th, td {
+    border-width: 2px;
+}
+
+.table > :not(caption) > * > * {
+    padding: .2rem .2rem;
+}
+
+.table_ticket {
+    width: 1000px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.card-ticket {
+    background-color: #f5f3f3;
+}

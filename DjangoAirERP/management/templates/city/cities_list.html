@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Cities List{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/staff/data_list.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container tabl-cont" id="tabl-city">
+
+        {% include "city/cities_filter.html" %}
+
+        <h2>Cities</h2>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Country</th>
+                <th scope="col">Details</th>
+            </tr>
+            </thead>
+            {% for city in object_list %}
+                <tbody>
+                <tr>
+                    <th scope="row">{{ city.id }}</th>
+                    <td>{{ city.name }}</td>
+                    <td>{{ city.country|upper }}</td>
+                    <td><a class="btn btn-info" href="{% url 'city_detail' city.id %}">Details</a></td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+
+        {% if page_obj.has_other_pages %}
+            {% include "pagination.html" %}
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Discount List{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/staff/data_list.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container tabl-cont" id="tabl-option">
+    <h2>Discount</h2>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Percents</th>
+                <th scope="col">Valid until</th>
+                <th scope="col">Update</th>
+            </tr>
+            </thead>
+            {% for discount in object_list %}
+                <tbody>
+                <tr>
+                    <th scope="row">{{ discount.id }}</th>
+                    <td>{{ discount.name }}</td>
+                    <td>{{ discount.percents }}</td>
+                    <td>{{ discount.valid_until }}</td>
+                    <td><a class="btn btn-info" href="{% url 'discount_update' discount.id %}">Update</a></td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+
+        {% if page_obj.has_other_pages %}
+            {% include "pagination.html" %}
+        {% endif %}
+    </div>
+{% endblock %}

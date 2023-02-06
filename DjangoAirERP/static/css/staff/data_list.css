@@ -1,0 +1,81 @@
+.cont-list {
+    margin-top: 50px;
+    width: 900px;
+
+}
+
+.describe {
+    text-align: center;
+}
+
+.air-view {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.data-view {
+    font-weight: bold;
+}
+
+small {
+    margin-right: 30px;
+    text-align: right;
+}
+
+.form-btn {
+    margin-top: 15px;
+    width: 200px;
+    padding: 12px;
+}
+
+.flight-filter {
+    margin-top: 15px;
+    margin-left: 0.5%;
+    border-radius: 8px;
+    border: #fdfdfd;
+    padding: 12px;
+    width: 49%;
+}
+
+#filter-radio {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#div-filter {
+    background-color: #c5c5c5;
+    margin-bottom: 40px;
+}
+
+#btn-filter {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 300px;
+}
+
+.ticket-card {
+    text-align: center;
+}
+
+.tabl-cont {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-top: 50px;
+}
+
+#tabl-option {
+    width: 900px;
+}
+
+#tabl-city {
+    width: 700px;
+}
+
+#airports-tabl {
+    width: 450px;
+}
+
+#tabl-airplane {
+    width: 1200px;
+}

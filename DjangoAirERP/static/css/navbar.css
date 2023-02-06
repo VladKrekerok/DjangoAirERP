@@ -1,0 +1,14 @@
+nav {
+    border: 1px solid #d2caca;
+}
+
+.bar-container {
+    width: 1000px;
+}
+
+#bar-span {
+    color: #d70d25;
+}
+.dropdown-item{
+    margin-right: 10px;
+}

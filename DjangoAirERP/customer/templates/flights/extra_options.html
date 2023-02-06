@@ -1,0 +1,20 @@
+{% if extra_options %}
+    {% for option in extra_options %}
+        <div class="card extra_option">
+            <div class="row">
+                <div class="block-img">
+                    <img class="img_option" src="../../../static/img/customer/ticket/extra_option.png">
+                </div>
+                <div class="block-descr">
+                    <small>Additional Luggage is not included.
+                        Available is possible to add <b>{{ option.option }} {{ option.weight }}kg!</b></small>
+                </div>
+                <div class="block-btn">
+                    <input class="form-check-input button_add" type="checkbox"
+                           name="{{ form.prefix }}-extra_options" value="{{ option.id }}">
+                    <small><b>{{ option.price }}$</b></small>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

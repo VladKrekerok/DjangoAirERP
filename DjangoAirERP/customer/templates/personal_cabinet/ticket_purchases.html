@@ -1,0 +1,35 @@
+{% if ticket_list %}
+    <div class="div-descr-card">
+        <h5><b>My purchases</b></h5>
+        {% for ticket in ticket_list %}
+            <div class="row">
+                <div class="ticket-num">
+                    № {{ forloop.counter }}
+                </div>
+                <div class="block-active">
+                    {% if ticket.landing %}
+                        <i class="bi bi-earlier bi-broadcast"></i>
+                    {% else %}
+                        <i class="bi bi-later bi-broadcast"></i>
+                    {% endif %}
+                </div>
+
+                <div class="ticket-list-block">
+                    <a href="{% url "ticket_detail" request.user.id ticket.id %}" id="ticket-btn"
+                       class="btn btn-outline-dark">
+                        <b>{{ ticket.flight.from_city.name }}</b>
+                        <small>{{ ticket.flight.departure_date|date:'j F Y' }}</small>
+                        <i class="bi bi-arrow-right"></i>
+                        <b>{{ ticket.flight.to_city.name }}</b>
+                        <small>{{ ticket.flight.date_arrival|date:'j F Y' }}</small>
+                    </a>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+        {% if page_obj.has_other_pages %}
+            <br>
+            {% include "pagination.html" %}
+        {% endif %}
+    </div>
+{% endif %}

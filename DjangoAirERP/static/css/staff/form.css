@@ -1,0 +1,31 @@
+.my-card {
+    background-color: rgba(204, 198, 198, 0.25);
+    text-align: center;
+    width: 600px;
+    margin: auto;
+    border: 1px solid rgba(246, 241, 241, 0.25);
+    margin-top: 100px;
+}
+
+.form-btn {
+    margin-top: 15px;
+    width: 200px;
+    padding: 12px;
+}
+
+.print-flight {
+    text-align: center;
+}
+
+.options-form {
+    text-align: left;
+}
+
+.btn-back{
+    margin-bottom: 20px;
+}
+
+.form-check-input{
+    width: 1.4rem;
+    height: 1.4rem;
+}

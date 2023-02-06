@@ -1,0 +1,32 @@
+<div class="row card-button">
+    <div class="div-bi">
+        <i class="bi bi-person-fill"></i>
+    </div>
+    <div class="desc-button">
+        <a href="{% url "customer_update" user.id %}" class="btn options">
+            Account detail
+        </a>
+    </div>
+</div>
+
+<div class="row card-button">
+    <div class="div-bi">
+        <i class="bi bi-ticket-detailed"></i>
+    </div>
+    <div class="desc-button">
+        <a href="{% url "customer_tickets" user.id %}" class="btn options">
+            My tickets
+        </a>
+    </div>
+</div>
+
+<div class="row card-button">
+    <div class="div-bi">
+        <i class="bi bi-ticket-detailed"></i>
+    </div>
+    <div class="desc-button">
+        <a href="{% url "ticket_search" user.id %}" class="btn options">
+            Ticket registration
+        </a>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Signup{% endblock %}
+{% block head %}
+    <link href="{% static "css/user_model/social.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="social-cont form_auth">
+        <h1>Sign Up</h1>
+        <p>You are using your account to log in, but the account with this email
+            address is already registered, you can continue logging in with
+            another email address by filling out the form.
+        </p>
+        <p>If this is your account and you have forgotten your password, follow the link and enter
+            your email address to change your password:
+            <a id="btn-link" href="{% url 'password_change' %}">reset password</a>
+        </p>
+
+        {% for error in form.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error|title }}
+            </div>
+        {% endfor %}
+
+        <form class="signup" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
+            {% csrf_token %}
+            <div>
+                <input class="form-control" maxlength="150" type="text" placeholder="Username" name="username"
+                       required/>
+            </div>
+            <div>
+                <input class="form-control" type="email" placeholder="Email" name="email"
+                       value="{{ form.initial.email }}" required/>
+            </div>
+            <button class="btn btn-secondary" id="sub-log" type="submit">log on</button>
+        </form>
+
+    </div>
+{% endblock %}

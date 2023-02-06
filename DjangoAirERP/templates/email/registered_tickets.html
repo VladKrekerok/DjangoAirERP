@@ -1,0 +1,52 @@
+<div>
+    <caption><h2 align="center">Your booked tickets</h2></caption>
+    {% for ticket in tickets %}
+        <table border="3" style="background: #f2f8f8;  border-spacing:  5px 10px; text-align: center">
+            <thead>
+            <tr>
+                <th scope="col"><h3>From city</h3></th>
+                <th scope="col"><h3>To city</h3></th>
+                <th scope="col"><h3>First name</h3></th>
+                <th scope="col"><h3>Last name</h3></th>
+                <th scope="col"><h3>Years old</h3></th>
+                <th scope="col"><h3>Birthday</h3></th>
+                <th scope="col"><h3>Gender</h3></th>
+                <th scope="col"><h3>Document no</h3></th>
+                <th scope="col"><h3>Place type</h3></th>
+                <th scope="col"><h3>Extra options</h3></th>
+                <th scope="col"><h3>Included options</h3></th>
+                <th scope="col"><h3>Price ticket</h3></th>
+                <th scope="col"><h3>Ticket price and all options</h3></th>
+                <th scope="col"><h3>Card number to pay</h3></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">{{ ticket.flight.from_city.name }}</th>
+                <td>{{ ticket.flight.to_city.name }}</td>
+                <td>{{ ticket.first_name }}</td>
+                <td>{{ ticket.last_name }}</td>
+                <td>{{ ticket.years_old }}</td>
+                <td>{{ ticket.date_birthday }}</td>
+                <td>{{ ticket.gender }}</td>
+                <td>{{ ticket.document_no }}</td>
+                <td>{{ ticket.place_type }}</td>
+                <td>
+                    {% for option in ticket.extra_options.all %}
+                        {{ option.option }} {{ option.weight }}kg
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for option in ticket.included_options.all %}
+                        {{ option.option }}
+                    {% endfor %}
+                </td>
+                <td>{{ ticket.price }}$</td>
+                <td>{{ ticket.price_with_options }}$</td>
+                <td>********</td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+    {% endfor %}
+</div>

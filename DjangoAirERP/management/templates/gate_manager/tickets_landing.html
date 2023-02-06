@@ -1,0 +1,8 @@
+{% if error_landing %}
+    <div class="alert alert-danger" id="tickets_alert" role="alert">{{ error_landing }}</div>
+{% endif %}
+
+<form action="{% url 'tickets_landing' ticket.pk %}" method="post">
+    {% csrf_token %}
+    <input class="btn btn-warning form-btn" type="submit" value="Landing register"/>
+</form>

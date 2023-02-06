@@ -1,0 +1,41 @@
+{% load static %}
+{% load account %}
+{% load socialaccount %}
+
+
+{% block head %}
+    <link href="{% static "css/user_model/login.css" %}" rel="stylesheet">
+{% endblock %}
+
+<div class="modal fade" id="login_ajax" tabindex="-1" aria-labelledby="ModalLogin" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="ModalLogin" align="center">Login</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="alert alert-danger" id="login_alert" style="display: none;" role="alert"></div>
+            <form action="{% url 'login' %}" method="POST" id="my_login">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    {{ login_form }}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-secondary log-btn">Log in</button>
+                </div>
+            </form>
+
+
+            <div class="box">
+                <h3 id="or">OR</h3>
+            </div>
+            <div align="center">
+                <a class="btn btn-outline-secondary log-site" href="{% provider_login_url "facebook" %}">
+                    Sign in with your account
+                    <i class="bi bi-facebook"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

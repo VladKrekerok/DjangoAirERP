@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My account{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/customer/personal_cabinet.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container my-contain" align="center">
+        <div class="card main-card">
+            <div class="row">
+                <div class="customer-buttons">
+                    {% include "personal_cabinet/cabinet_button.html" %}
+                </div>
+                {% if user == request.user %}
+                    {% include "personal_cabinet/customer_update.html" %}
+                    {% include "personal_cabinet/ticket_purchases.html" %}
+                    {% include "personal_cabinet/ticket_detail.html" %}
+                    {% include "personal_cabinet/ticket_reg.html" %}
+                {% endif %}
+                <div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
